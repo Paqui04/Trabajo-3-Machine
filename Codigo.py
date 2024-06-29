@@ -53,14 +53,14 @@ X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2,
 models = {
     'Decision Tree': DecisionTreeClassifier(),
     'Random Forest': RandomForestClassifier(),
-    'AdaBoost': AdaBoostClassifier(algorithm='SAMME')
+    'AdaBoost': AdaBoostClassifier(estimator=DecisionTreeClassifier(max_depth=3), algorithm='SAMME')
 }
 
 # Afinar hiperparámetros y entrenar modelos
 param_grids = {
     'Decision Tree': {'max_depth': [3, 5, 7, None]},
     'Random Forest': {'n_estimators': [10, 50, 100], 'max_depth': [3, 5, 7, None]},
-    'AdaBoost': {'n_estimators': [50, 100, 200], 'learning_rate': [0.01, 0.1, 1]}
+    'AdaBoost': {'n_estimators': [50, 100, 200, 300], 'learning_rate': [0.01, 0.1, 1]}
 }
 
 best_models = {}
