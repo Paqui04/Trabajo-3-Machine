@@ -12,16 +12,14 @@ from imblearn.over_sampling import SMOTE
 from sklearn.exceptions import UndefinedMetricWarning
 import warnings
 
-# Ignorar advertencias
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 
-# Cargar el dataset de Yeast desde el archivo local
-file_path = 'yeast.data'  # Asegúrate de poner la ruta correcta al archivo descargado
+file_path = 'yeast.data'
 df = pd.read_csv(file_path, sep=r'\s+', header=None)
 
-# Asignar nombres a las columnas según la documentación del dataset
+# Asignar nombres a las columnas
 df.columns = ['SequenceName', 'mcg', 'gvh', 'alm', 'mit', 'erl', 'pox', 'vac', 'nuc', 'Class']
 
 # Eliminar la columna de nombres de secuencias ya que no es útil para la clasificación
@@ -33,7 +31,7 @@ le = LabelEncoder()
 df['Class'] = le.fit_transform(df['Class'])
 label_encoders['Class'] = le
 
-# Imputación de valores faltantes (aunque en este dataset no debería haber)
+# Imputación de valores faltantes
 imputer = SimpleImputer(strategy='mean')
 df_imputed = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
 
